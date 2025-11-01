@@ -22,7 +22,7 @@ const HeroSection = () => {
   }, [heroImages.length]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden">
       {/* Background slideshow */}
       {heroImages.map((image, index) => (
         <div
@@ -38,7 +38,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-black/75 z-20"></div>
 
       {/* Content */}
-      <div className="relative z-30 container mx-auto px-6 lg:px-12 h-full flex flex-col justify-center items-start pt-[180px]">
+      <div className="relative z-30 container mx-auto px-6 lg:px-12 flex flex-col justify-center items-start pt-[180px] pb-20">
         <div className="max-w-5xl text-left text-white -ml-6 md:-ml-12">
           {/* Headings */}
           <h4
