@@ -64,9 +64,9 @@ export default function Header() {
   }
   
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header className="bg-transparent absolute top-0 left-0 w-full z-50">
       {/* Top Header Section - Hidden on small screens */}
-      <div className="bg-primary text-white py-2 hidden md:block">
+      <div className="bg-primary bg-opacity-80 text-white py-2 hidden md:block">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row md:justify-between md:items-center">
             <div className="text-sm mb-2 md:mb-0">
@@ -132,7 +132,7 @@ export default function Header() {
                   <>
                     <button
                       onClick={() => toggleDropdown(link.name)}
-                      className="text-gray-700 hover:text-primary font-medium flex items-center transition-colors"
+                      className="text-white hover:text-accent font-medium flex items-center transition-colors"
                     >
                       {link.name}
                       <FaChevronDown className="ml-1 h-3 w-3" />
@@ -156,7 +156,7 @@ export default function Header() {
                 ) : (
                   <Link 
                     href={link.href}
-                    className="text-gray-700 hover:text-primary font-medium transition-colors"
+                    className="text-white hover:text-accent font-medium transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -167,7 +167,7 @@ export default function Header() {
           
           {/* Mobile Menu Button - Only visible on small screens */}
           <button 
-            className="md:hidden text-primary focus:outline-none"
+            className="md:hidden text-white focus:outline-none"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
