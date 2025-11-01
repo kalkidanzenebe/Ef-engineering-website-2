@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 const HeroSection = () => {
   const heroImages = [
-    '/images/hero/roofing-banner.jpg',
     '/images/hero/home.jpg',
     '/images/hero/home2.jpg',
     '/images/hero/house.jpg',
