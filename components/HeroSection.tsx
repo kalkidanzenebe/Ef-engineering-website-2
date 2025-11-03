@@ -20,16 +20,35 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
+  // Reset animations when slide changes
+  useEffect(() => {
+    const elements = document.querySelectorAll('.animate-slideInLeft, .animate-fadeIn');
+    elements.forEach(el => {
+      el.classList.remove('animate-slideInLeft', 'animate-fadeIn');
+      void (el as HTMLElement).offsetWidth; // Trigger reflow
+      el.classList.add('animate-slideInLeft');
+      if (el.classList.contains('divider-line')) {
+        el.classList.add('animate-fadeIn');
+      }
+    });
+  }, [currentImageIndex]);
+
   return (
     <section className="relative w-full overflow-hidden">
       {/* Background slideshow */}
       {heroImages.map((image, index) => (
         <div
           key={index}
-          className={`absolute inset-0 bg-cover bg-center transition-all duration-[1500ms] ease-in-out ${
-            index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+          className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${
+            index === currentImageIndex 
+              ? 'opacity-100 scale-100 z-10' 
+              : 'opacity-0 scale-110 z-0'
           }`}
-          style={{ backgroundImage: `url(${image})` }}
+          style={{ 
+            backgroundImage: `url(${image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
         ></div>
       ))}
 
@@ -37,43 +56,46 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-black/75 z-20"></div>
 
       {/* Content */}
-      <div className="relative z-30 container mx-auto px-6 lg:px-12 flex flex-col justify-center items-start pt-[180px] pb-20">
-        <div className="max-w-5xl text-left text-white -ml-6 md:-ml-12">
+      <div className="relative z-30 w-full px-6 lg:px-12 flex flex-col justify-center items-start pt-[180px] pb-20">
+        <div className="max-w-5xl text-left text-white">
           {/* Headings */}
           <h4
-            className="uppercase text-[34px] font-bold mb-2 opacity-0 animate-slideInRight"
-            style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}
+            className="uppercase text-[34px] font-bold mb-2 opacity-0 animate-slideInLeft"
+            style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
           >
-            High-quality
+            EF Architect and
           </h4>
 
           <h1
-            className="uppercase text-[60px] md:text-[70px] font-extrabold leading-tight opacity-0 animate-slideInRight text-transparent stroke-white stroke-2"
-            style={{ animationDelay: '1.4s', animationFillMode: 'forwards' }}
+            className="uppercase text-[60px] md:text-[70px] font-extrabold leading-tight opacity-0 animate-slideInLeft text-transparent stroke-white stroke-2"
+            style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
           >
-            Roofing Services
+            Engineering Consulting
           </h1>
 
           <h3
-            className="uppercase text-[36px] md:text-[42px] font-extrabold mt-[-10px] opacity-0 animate-slideInRight"
-            style={{ animationDelay: '1.6s', animationFillMode: 'forwards' }}
+            className="uppercase text-[36px] md:text-[42px] font-extrabold mt-[-10px] opacity-0 animate-slideInLeft"
+            style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}
           >
-            Trusted by Professionals
+            Professional Solutions Since 2015
           </h3>
 
           {/* Divider line */}
-          <div className="w-full h-px bg-white/20 my-8"></div>
+          <div 
+            className="w-full h-px bg-white/20 my-8 opacity-0 animate-fadeIn divider-line"
+            style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}
+          ></div>
 
-          {/* Hero Item (Worker + Content) */}
+          {/* Hero Item (Worker + Content) - Both slide in together */}
           <div
-            className="flex flex-col sm:flex-row items-start gap-6 mt-6 opacity-0 animate-slideInRight"
-            style={{ animationDelay: '1.8s', animationFillMode: 'forwards' }}
+            className="flex flex-col sm:flex-row items-start gap-6 mt-6 opacity-0 animate-slideInLeft"
+            style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
           >
             {/* Worker Image */}
             <div className="hero-image w-full sm:w-[400px] h-[250px] rounded-md overflow-hidden border border-white/10 shadow-lg bg-white/5 backdrop-blur-sm flex-shrink-0">
               <img
                 src="/images/hero/home.jpg"
-                alt="Worker"
+                alt="EF Architect and Engineering Consulting Project"
                 className="w-full h-full object-cover object-top"
               />
             </div>
@@ -81,9 +103,9 @@ const HeroSection = () => {
             {/* Text + Buttons */}
             <div className="content flex-1 max-w-[600px]">
               <p className="text-gray-200 text-[17px] leading-relaxed mb-8">
-                Conztra combines solid design with advanced features to build
-                stunning construction websites. Perfect for contractors,
-                architecture studios, and renovation companies.
+                EF Architect and Engineering Consulting is a professional firm established in 2015 
+                by a group of young, ambitious architects and engineers with extensive experience in 
+                their respective fields. We deliver innovative architectural and engineering solutions.
               </p>
 
               <div className="flex flex-wrap gap-4 hero-button">
@@ -98,7 +120,7 @@ const HeroSection = () => {
                   href="#service"
                   className="bg-white text-orange-600 font-bold uppercase px-8 py-3 rounded-sm flex items-center justify-center gap-2 text-[16px] border-2 border-white hover:bg-orange-600 hover:text-white transition-all duration-300"
                 >
-                  Our Service <i className="fa-solid fa-arrow-right text-base"></i>
+                  Our Services <i className="fa-solid fa-arrow-right text-base"></i>
                 </a>
               </div>
             </div>
@@ -127,18 +149,32 @@ const HeroSection = () => {
           -webkit-text-stroke: 2px white;
         }
 
-        @keyframes slideInRight {
+        @keyframes slideInLeft {
           0% {
             opacity: 0;
-            transform: translateX(100px);
+            transform: translateX(100vw);
           }
           100% {
             opacity: 1;
             transform: translateX(0);
           }
         }
-        .animate-slideInRight {
-          animation: slideInRight 1s ease-out forwards;
+        
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+        
+        .animate-slideInLeft {
+          animation: slideInLeft 1s ease-out forwards;
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out forwards;
         }
       `}</style>
     </section>
