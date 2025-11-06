@@ -116,7 +116,7 @@ export default function About() {
         {/* WHY US - dark band */}
         <section className="relative mb-20 overflow-hidden">
           <div className="absolute inset-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/hero/bonga.jpg" alt="background" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-[#0f1a1a]/85" />
           </div>
@@ -142,7 +142,7 @@ export default function About() {
                   ].map((b) => (
                     <div key={b} className="flex items-start gap-2"><span className="mt-1 inline-block w-2 h-2 bg-orange-400"></span><span>{b}</span></div>
                   ))}
-                </div>
+              </div>
             </div>
           </Reveal>
             <Reveal variant="right">
@@ -230,7 +230,7 @@ export default function About() {
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M13 5.828V9a1 1 0 1 1-2 0V5.828L8.414 8.414a1 1 0 1 1-1.414-1.414l4.293-4.293a1 1 0 0 1 1.414 0l4.293 4.293a1 1 0 1 1-1.414 1.414L13 5.828z"/><path d="M5 13a1 1 0 0 1 1 1v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a1 1 0 1 1 2 0v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-3a1 1 0 0 1 1-1z"/></svg>
                       </a>
                     </div>
-                  </div>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -252,7 +252,7 @@ export default function About() {
                 <p className="text-white/80 mt-2 max-w-2xl">Tell us about your goals—our team will propose the safest, most cost‑effective path to deliver them.</p>
               </div>
               <a href="/contact" className="inline-flex items-center gap-2 bg-orange-500 hover:bg-white hover:text-black text-white px-6 py-3 font-semibold uppercase tracking-wide transition-colors">Call or Message →</a>
-            </div>
+          </div>
           </section>
         </Reveal>
       </main>

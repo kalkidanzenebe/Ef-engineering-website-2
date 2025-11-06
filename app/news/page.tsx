@@ -1,45 +1,57 @@
+"use client"
 import PageHeader from '../../components/PageHeader'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' })
 
 export default function News() {
+  const [items, setItems] = useState<any[]>([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setLoading(true)
+        const res = await fetch('https://api.efengineering-architect.com/api/news', { cache: 'no-store' })
+        const data = await res.json()
+        setItems((Array.isArray(data) ? data : data?.data) || [])
+      } finally {
+        setLoading(false)
+      }
+    }
+    load()
+  }, [])
+
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader title="Latest News" />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-primary mb-6">Latest News</h1>
-        <p className="text-gray-700 mb-4">
-          Stay updated with the latest news and events from EF Engineering.
-        </p>
-        <div className="space-y-6 mt-8">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold text-primary mb-2">New Office Inauguration</h2>
-            <p className="text-gray-500 text-sm mb-3">Published on: October 15, 2025</p>
-            <p className="text-gray-700 mb-4">
-              We are proud to announce the opening of our new office facility, which will serve as our regional headquarters...
-            </p>
-            <button className="text-primary font-medium hover:underline">
-              Read More
-            </button>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold text-primary mb-2">Award Recognition</h2>
-            <p className="text-gray-500 text-sm mb-3">Published on: September 28, 2025</p>
-            <p className="text-gray-700 mb-4">
-              EF Engineering has been recognized with the Excellence in Design Award for our innovative approach...
-            </p>
-            <button className="text-primary font-medium hover:underline">
-              Read More
-            </button>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold text-primary mb-2">Sustainability Initiative</h2>
-            <p className="text-gray-500 text-sm mb-3">Published on: September 10, 2025</p>
-            <p className="text-gray-700 mb-4">
-              Our commitment to sustainable construction practices has led to the implementation of new green building standards...
-            </p>
-            <button className="text-primary font-medium hover:underline">
-              Read More
-            </button>
-          </div>
+      <main className="container mx-auto px-4 py-12">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">Latest News</h1>
+        <p className="text-gray-600 mt-2">Stay updated with the latest news and events from EF Engineering.</p>
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {loading ? (
+            new Array(6).fill(0).map((_,i)=>(<div key={i} className="h-72 bg-white border border-gray-200 animate-pulse" />))
+          ) : items.length ? (
+            items.map((n: any, i: number) => (
+              <div key={n.id} className="bg-white border border-gray-200 flex flex-col">
+                <div className="h-56 bg-gray-200 overflow-hidden">
+                  <img src={n.photos?.[0]?.path || n.image || `/assets/img/blog/blog-v1-img${(i%6)+1}.jpg`} alt={n.title} className="w-full h-full object-cover" />
+                </div>
+                <div className="p-5 flex flex-col gap-3">
+                  <div className="flex items-center justify-between text-xs text-gray-500">
+                    <span>{n.category || 'News'}</span>
+                    <span>{n.created_at ? fmt(n.created_at) : ''}</span>
+                  </div>
+                  <h3 className="text-lg font-extrabold text-gray-900 leading-snug">{n.title}</h3>
+                  <p className="text-gray-600 text-sm">{(n.short_desc || (n.description||'').replace(/<[^>]*>/g,'')).slice(0,120)}...</p>
+                  <Link href={`/news/${n.id}`} className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-orange-600">READ MORE</Link>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="text-gray-600">No news available.</div>
+          )}
         </div>
       </main>
     </div>

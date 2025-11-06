@@ -1,52 +1,58 @@
-import Header from '../../components/Header'
+"use client"
+import PageHeader from '../../components/PageHeader'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+
+const fmt = (d: string) => new Date(d).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
 
 export default function Vacancy() {
+  const [jobs, setJobs] = useState<any[]>([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setLoading(true)
+        const res = await fetch('https://api.efengineering-architect.com/api/jobs', { cache: 'no-store' })
+        const data = await res.json()
+        setJobs((Array.isArray(data) ? data : data?.data) || [])
+      } finally {
+        setLoading(false)
+      }
+    }
+    load()
+  }, [])
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-primary mb-6">Career Opportunities</h1>
-        <p className="text-gray-700 mb-4">
-          Join our team of professionals and be part of innovative engineering projects.
-        </p>
-        <div className="mt-8">
-          <h2 className="text-2xl font-bold text-primary mb-4">Current Openings</h2>
-          <div className="space-y-4">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800">Senior Structural Engineer</h3>
-                  <p className="text-gray-600">Full-time | Addis Ababa</p>
+      <PageHeader title="Current Vacancies" />
+      <main className="container mx-auto px-4 py-12">
+        <div className="text-center max-w-2xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">Join Our Team</h1>
+          <p className="text-gray-600 mt-2">Explore exciting career opportunities at EF Engineering.</p>
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {loading ? (
+            new Array(4).fill(0).map((_,i)=>(<div key={i} className="h-48 bg-white border border-gray-200 animate-pulse" />))
+          ) : jobs.length ? (
+            jobs.map((job: any) => (
+              <div key={job.id} className="bg-white border border-gray-200 p-6 flex flex-col gap-3">
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="text-xl font-extrabold text-gray-900">{job.title}</h3>
+                  <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-700">{job.type}</span>
                 </div>
-                <span className="bg-accent text-white px-3 py-1 rounded-full text-sm">New</span>
+                <div className="flex items-center gap-4 text-sm text-gray-600">
+                  <span>Deadline: {job.deadline ? fmt(job.deadline) : '—'}</span>
+                </div>
+                <div className="mt-2">
+                  <Link href={`/vacancy/detail/${job.id}`} className="inline-flex items-center font-semibold text-white bg-orange-500 hover:bg-orange-600 px-5 py-2">View Details</Link>
+                </div>
               </div>
-              <p className="text-gray-700 mt-3">
-                We are looking for an experienced structural engineer to lead complex infrastructure projects.
-              </p>
-              <button className="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-opacity-90 transition">
-                Apply Now
-              </button>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-gray-800">Project Manager</h3>
-              <p className="text-gray-600">Full-time | Addis Ababa</p>
-              <p className="text-gray-700 mt-3">
-                Seeking a skilled project manager to oversee commercial and residential construction projects.
-              </p>
-              <button className="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-opacity-90 transition">
-                Apply Now
-              </button>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-gray-800">Architectural Designer</h3>
-              <p className="text-gray-600">Full-time | Remote</p>
-              <p className="text-gray-700 mt-3">
-                Creative architect with 3+ years of experience in residential and commercial design.
-              </p>
-              <button className="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-opacity-90 transition">
-                Apply Now
-              </button>
-            </div>
-          </div>
+            ))
+          ) : (
+            <div className="text-gray-600">No vacancies available at the moment.</div>
+          )}
         </div>
       </main>
     </div>

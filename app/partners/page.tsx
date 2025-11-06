@@ -1,24 +1,42 @@
+"use client"
+import { useEffect, useState } from 'react'
+import PageHeader from '../../components/PageHeader'
 
 export default function Partners() {
+  const [partners, setPartners] = useState<any[]>([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setLoading(true)
+        // old site uses clients endpoint for collaborators/partners
+        const res = await fetch('https://api.efengineering-architect.com/api/clients', { cache: 'no-store' })
+        const data = await res.json()
+        setPartners((Array.isArray(data) ? data : data?.data) || [])
+      } finally {
+        setLoading(false)
+      }
+    }
+    load()
+  }, [])
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-primary mb-6">Our Partners</h1>
-        <p className="text-gray-700 mb-4">
-          Our strategic partnerships enable us to deliver comprehensive solutions and exceed client expectations.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          {[...Array(8)].map((_, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <div className="w-20 h-20 bg-gray-300 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <span className="text-gray-500 text-sm">Partner Logo</span>
+      <PageHeader title="Our Partners" />
+      <main className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          {loading ? (
+            new Array(10).fill(0).map((_,i)=>(<div key={i} className="h-24 bg-white border border-gray-200 animate-pulse" />))
+          ) : partners.length ? (
+            partners.map((p: any, i: number) => (
+              <div key={p.id || i} className="bg-white border border-gray-200 p-4 flex items-center justify-center">
+                <img src={p.logo || p.image || p.photo || '/assets/img/brand/brand-v1-img1.png'} alt={p.name || 'Partner'} className="h-14 object-contain" />
               </div>
-              <h2 className="text-xl font-bold text-center text-primary mb-2">Partner {index + 1}</h2>
-              <p className="text-gray-700 text-center">
-                Industry leader specializing in innovative solutions and technologies.
-              </p>
-            </div>
-          ))}
+            ))
+          ) : (
+            <div className="text-gray-600">No partners to display.</div>
+          )}
         </div>
       </main>
     </div>
