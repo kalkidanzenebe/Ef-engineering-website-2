@@ -79,54 +79,11 @@ export default function Header() {
   
   return (
     <header className="fixed top-0 left-0 w-full z-[100]">
-      {/* Top Header Section - Hidden on small screens and removed on scroll */}
-      <div className={`transition-all duration-300 ${scrolled ? 'hidden' : 'block'}`}>
-        <div className="bg-primary bg-opacity-80 text-white py-2 hidden md:block">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center">
-              <div className="text-sm mb-2 md:mb-0">
-                The Future in Construction. WorldWide.
-              </div>
-              <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
-                {/* Social Icons */}
-                <div className="flex space-x-3">
-                  {socialLinks.map((social) => (
-                    <a 
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-accent transition-colors"
-                      aria-label={social.name}
-                    >
-                      <div className="h-6 w-6 flex items-center justify-center">
-                        {social.icon}
-                      </div>
-                    </a>
-                  ))}
-                </div>
-                
-                {/* Top Menu */}
-                <div className="flex space-x-4">
-                  {topLinks.map((link) => (
-                    <Link 
-                      key={link.name}
-                      href={link.href}
-                      className="text-white hover:text-accent text-sm transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Top header removed for a cleaner modern look */}
       
       {/* Main Header - Sticky and transparent initially, becomes opaque on scroll */}
       <div className={`transition-all duration-300 sticky top-0 ${
-        scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+        scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-6'
       }`}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">

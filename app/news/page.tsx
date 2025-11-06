@@ -1,8 +1,9 @@
-import Header from '../../components/Header'
+import PageHeader from '../../components/PageHeader'
 
 export default function News() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <PageHeader title="Latest News" />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-primary mb-6">Latest News</h1>
         <p className="text-gray-700 mb-4">
