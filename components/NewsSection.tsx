@@ -127,7 +127,7 @@ const NewsSection = () => {
                   <p className="text-gray-600 text-[14px] leading-6 mb-5 line-clamp-2">
                     {excerpt}
                   </p>
-                  <Link href={`/news/${news.id}`} className="inline-flex items-center gap-2 text-[#111] font-semibold uppercase text-[13px] group">
+                  <Link href={`/news/${news.id}`} className="inline-flex items-center gap-2 text-[#111] hover:text-orange-600 font-semibold uppercase text-[13px] group">
                     Read More
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </Link>

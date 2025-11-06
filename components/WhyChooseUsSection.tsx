@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import React from 'react';
+import Reveal from './Reveal';
 
 const FeatureItem = ({
   icon,
@@ -30,25 +31,33 @@ const WhyChooseUsSection = () => {
       <div className="container mx-auto px-0 lg:px-4 grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden">
         {/* Left image */}
         <div className="relative min-h-[520px] h-full">
-          <Image
-            src="/images/hero/industrialpark.jpg"
-            alt="Construction site with engineers"
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
+          <Reveal variant="left">
+            <Image
+              src="/images/hero/industrialpark.jpg"
+              alt="Construction site with engineers"
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </Reveal>
         </div>
 
         {/* Right content */}
         <div className="bg-[#141414] px-6 md:px-10 py-10 flex flex-col justify-center">
-          <div className="uppercase tracking-[.2em] text-xs text-white/60 mb-1">WHATS REASONS</div>
-          <h2 className="text-white text-[40px] md:text-[52px] leading-tight font-extrabold mb-6 uppercase">Why Choose Us</h2>
-          <p className="text-white/80 mb-8 max-w-2xl text-[15px] leading-7">
-            At EF Engineering, we believe construction is more than just building — it’s about
-            creating spaces that inspire and endure. With years of expertise, a skilled team,
-            and a passion for precision.
-          </p>
+          <Reveal variant="up" delay={0}>
+            <div className="uppercase tracking-[.2em] text-xs text-white/60 mb-1">WHATS REASONS</div>
+          </Reveal>
+          <Reveal variant="up" delay={120}>
+            <h2 className="text-white text-[40px] md:text-[52px] leading-tight font-extrabold mb-6 uppercase">Why Choose Us</h2>
+          </Reveal>
+          <Reveal variant="up" delay={240}>
+            <p className="text-white/80 mb-8 max-w-2xl text-[15px] leading-7">
+              At EF Engineering, we believe construction is more than just building — it’s about
+              creating spaces that inspire and endure. With years of expertise, a skilled team,
+              and a passion for precision.
+            </p>
+          </Reveal>
 
           <div className="space-y-4">
             <FeatureItem
@@ -86,7 +95,7 @@ const WhyChooseUsSection = () => {
           <div className="mt-8">
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 font-semibold uppercase tracking-wide"
+              className="inline-flex items-center gap-2 bg-orange-500 hover:bg-black text-white px-6 py-3 font-semibold uppercase tracking-wide transition-colors"
             >
               Lrar More
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">

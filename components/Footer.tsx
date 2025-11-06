@@ -1,4 +1,5 @@
 import React from 'react';
+import Reveal from './Reveal';
 
 const Footer = () => {
   return (
@@ -6,6 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Contact Us */}
+          <Reveal>
           <div>
             <h4 className="text-[18px] font-extrabold uppercase tracking-wide mb-4">Contact Us</h4>
             <div className="w-10 h-[2px] bg-orange-500 mb-6"></div>
@@ -18,8 +20,10 @@ const Footer = () => {
               <p>+006 1579 000 852</p>
             </div>
           </div>
+          </Reveal>
 
           {/* Our Services */}
+          <Reveal delay={120}>
           <div>
             <h4 className="text-[18px] font-extrabold uppercase tracking-wide mb-4">Our Services</h4>
             <div className="w-10 h-[2px] bg-orange-500 mb-6"></div>
@@ -30,8 +34,10 @@ const Footer = () => {
               <li><a href="#" className="hover:text-white">Rain Proof Roofers</a></li>
             </ul>
           </div>
+          </Reveal>
 
           {/* Useful Links */}
+          <Reveal delay={240}>
           <div>
             <h4 className="text-[18px] font-extrabold uppercase tracking-wide mb-4">Useful Links</h4>
             <div className="w-10 h-[2px] bg-orange-500 mb-6"></div>
@@ -42,8 +48,10 @@ const Footer = () => {
               <li><a href="/news" className="hover:text-white">Latest News</a></li>
             </ul>
           </div>
+          </Reveal>
 
           {/* Gallery */}
+          <Reveal delay={360}>
           <div>
             <h4 className="text-[18px] font-extrabold uppercase tracking-wide mb-4">Gallery</h4>
             <div className="w-10 h-[2px] bg-orange-500 mb-6"></div>
@@ -57,26 +65,33 @@ const Footer = () => {
               <img src="/images/hero/3d4.jpg" alt="g6" className="h-16 w-full object-cover" />
             </div>
           </div>
+          </Reveal>
         </div>
       </div>
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-white/80">
-          <div>
-            © {new Date().getFullYear()} <span className="text-orange-500 font-semibold">EF Engineering & Architecture</span>. All Rights Reserved.
-          </div>
-          <div className="flex items-center gap-6 text-sm">
-            <a href="#" className="hover:text-white">Terms & Conditions</a>
-            <a href="#" className="hover:text-white">Privacy Policy</a>
-            <a href="/contact" className="hover:text-white">Contact Us</a>
-          </div>
-          <div className="flex items-center gap-3">
-            <a className="w-10 h-10 bg-[#222] hover:bg-[#2a2a2a] flex items-center justify-center" href="#" aria-label="facebook">f</a>
-            <a className="w-10 h-10 bg-[#222] hover:bg-[#2a2a2a] flex items-center justify-center" href="#" aria-label="twitter">t</a>
-            <a className="w-10 h-10 bg-[#222] hover:bg-[#2a2a2a] flex items-center justify-center" href="#" aria-label="vimeo">v</a>
-            <a className="w-10 h-10 bg-[#222] hover:bg-[#2a2a2a] flex items-center justify-center" href="#" aria-label="pinterest">p</a>
-          </div>
+          <Reveal>
+            <div>
+              © {new Date().getFullYear()} <span className="text-orange-500 font-semibold">EF Engineering & Architecture</span>. All Rights Reserved.
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="flex items-center gap-6 text-sm">
+              <a href="#" className="hover:text-white transition-colors">Terms & Conditions</a>
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/contact" className="hover:text-white transition-colors">Contact Us</a>
+            </div>
+          </Reveal>
+          <Reveal delay={240}>
+            <div className="flex items-center gap-3">
+              <a className="w-10 h-10 bg-[#222] hover:bg-[#2a2a2a] flex items-center justify-center transition-colors" href="#" aria-label="facebook">f</a>
+              <a className="w-10 h-10 bg-[#222] hover:bg-[#2a2a2a] flex items-center justify-center transition-colors" href="#" aria-label="twitter">t</a>
+              <a className="w-10 h-10 bg-[#222] hover:bg-[#2a2a2a] flex items-center justify-center transition-colors" href="#" aria-label="vimeo">v</a>
+              <a className="w-10 h-10 bg-[#222] hover:bg-[#2a2a2a] flex items-center justify-center transition-colors" href="#" aria-label="pinterest">p</a>
+            </div>
+          </Reveal>
         </div>
       </div>
     </footer>

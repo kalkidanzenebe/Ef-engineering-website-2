@@ -85,3 +85,10 @@
 .animate-slow-zoom {
     animation: slow-zoom 10s ease-in-out infinite;
 }
+
+/* Reveal on scroll utility */
+.reveal-base { opacity: 0; transition: opacity 600ms ease, transform 600ms ease; }
+.reveal-up { transform: translateY(24px); }
+.reveal-left { transform: translateX(-32px); }
+.reveal-right { transform: translateX(32px); }
+.reveal-visible { opacity: 1; transform: translate(0,0); }

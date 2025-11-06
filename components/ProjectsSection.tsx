@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
+import Reveal from './Reveal';
 
 interface Project {
   id: number;
@@ -83,6 +84,7 @@ const ProjectsSection = () => {
   return (
     <section className="relative py-20 bg-white overflow-hidden">
       {/* Header */}
+      <Reveal>
       <div className="text-center mb-16">
         <p className="uppercase text-xs text-orange-500 font-semibold tracking-[0.3em] mb-3 border border-orange-500 px-3 py-1 rounded-full inline-block">
           OUR PROJECT
@@ -91,6 +93,7 @@ const ProjectsSection = () => {
           BUILDING LANDMARKS THAT INSPIRE
         </h2>
       </div>
+      </Reveal>
 
       {/* Left Controls */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col items-center space-y-8 pl-4 z-20">
@@ -128,6 +131,7 @@ const ProjectsSection = () => {
         "
       >
         {projects.slice(0, 7).map((project) => (
+          <Reveal key={project.id}>
           <div
             key={project.id}
             onMouseEnter={() => setActive(project.id)}
@@ -171,6 +175,7 @@ const ProjectsSection = () => {
               </>
             )}
           </div>
+          </Reveal>
         ))}
       </div>
     </section>

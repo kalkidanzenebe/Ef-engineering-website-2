@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { FaUniversity, FaProjectDiagram, FaTools } from "react-icons/fa";
 import axios from 'axios';
 import Link from 'next/link';
+import Reveal from './Reveal';
 
 const ServicesSection = () => {
   const [services, setServices] = useState<any[]>([]);
@@ -115,8 +116,9 @@ const ServicesSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-6">
-          {displayedServices.map((service: any) => (
-            <div key={service.id} className="bg-white rounded-md shadow-md overflow-hidden text-center transition-transform transform hover:-translate-y-2 duration-300 flex flex-col h-full mx-auto max-w-sm">
+          {displayedServices.map((service: any, i: number) => (
+            <Reveal key={service.id} delay={i * 120}>
+            <div className="bg-white rounded-md shadow-md overflow-hidden text-center transition-transform transform hover:-translate-y-2 duration-300 flex flex-col h-full mx-auto max-w-sm">
               <div className="relative w-full h-[300px] overflow-hidden p-4 pb-0">
                 <img
                   src={getServiceImageUrl(service)}
@@ -139,12 +141,13 @@ const ServicesSection = () => {
                 </div>
                 <Link 
                   href={`/services/${service.id}`}
-                  className="text-lg font-semibold text-gray-800 hover:text-[#ff4c00] transition self-center"
+                  className="text-sm font-semibold uppercase tracking-wide text-white bg-[#111] hover:bg-[#ff4c00] transition-colors px-5 py-3 self-center"
                 >
                   READ MORE <span className="ml-1">+</span>
                 </Link>
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
       </div>
