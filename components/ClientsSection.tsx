@@ -95,13 +95,12 @@ const ClientsSection = () => {
   const items = clients.length ? clients : [];
 
   return (
-    <section className="py-8 bg-white">
+    <section className="py-8 bg-[#f5f5f5]">
       <div className="container mx-auto px-2 md:px-4">
-        <div className="flex items-center justify-between mb-2">
-          <div className="text-[12px] tracking-[.2em] text-orange-500 font-semibold uppercase">Our Clients</div>
-          <div className="hidden md:flex gap-2">
-            <button onClick={() => scrollByAmount(-300)} className="w-8 h-8 flex items-center justify-center border border-gray-300 hover:bg-gray-100">‹</button>
-            <button onClick={() => scrollByAmount(300)} className="w-8 h-8 flex items-center justify-center border border-gray-300 hover:bg-gray-100">›</button>
+        <div className="flex items-center justify-center mb-4">
+          <div className="flex items-center gap-2">
+            <button onClick={() => scrollByAmount(-300)} className="w-10 h-10 flex items-center justify-center bg-white shadow-sm hover:bg-gray-50">‹</button>
+            <button onClick={() => scrollByAmount(300)} className="w-10 h-10 flex items-center justify-center bg-orange-500 text-white shadow-sm hover:bg-orange-600">»</button>
           </div>
         </div>
 
