@@ -31,16 +31,14 @@ const WhyChooseUsSection = () => {
       <div className="container mx-auto px-0 lg:px-4 grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden">
         {/* Left image */}
         <div className="relative min-h-[520px] h-full">
-          <Reveal variant="left">
-            <Image
-              src="/images/hero/industrialpark.jpg"
-              alt="Construction site with engineers"
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </Reveal>
+          <Image
+            src="/images/hero/industrialpark.jpg"
+            alt="Construction site with engineers"
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
         </div>
 
         {/* Right content */}

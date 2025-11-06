@@ -31,10 +31,8 @@ const ContactSection = () => {
 
           {/* Right - Image side */}
           <div className="relative min-h-[340px] md:min-h-[460px]">
-            <Reveal variant="right">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/hero/house.jpg" alt="contact visual" className="absolute inset-0 w-full h-full object-cover z-[1]" />
-            </Reveal>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/hero/house.jpg" alt="contact visual" className="absolute inset-0 w-full h-full object-cover z-[1]" />
           </div>
         </div>
       </div>
