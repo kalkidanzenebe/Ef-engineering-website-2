@@ -1,4 +1,5 @@
 import PageHeader from '../../../components/PageHeader'
+import Reveal from '../../../components/Reveal'
 import { FaAngleRight } from 'react-icons/fa'
 
 const getImage = (s) => {
@@ -31,32 +32,38 @@ export default async function Page(props) {
       <PageHeader title={title} />
       <main className="container mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
         <article className="lg:col-span-8">
-          <div className="relative h-[260px] md:h-[360px] bg-gray-200 overflow-hidden">
-            <img src={getImage(service)} alt={title} className="absolute inset-0 w-full h-full object-cover" />
-          </div>
-          <div className="bg-white p-6 md:p-8 mt-6 border border-gray-200">
-            <h1 className="text-2xl md:text-3xl font-extrabold mb-4">{title}</h1>
-            <div
-              className="prose max-w-none prose-p:leading-7"
-              dangerouslySetInnerHTML={{ __html: service?.description || '<p>Details coming soon.</p>' }}
-            />
-          </div>
+          <Reveal variant="up" delay={0}>
+            <div className="relative h-[260px] md:h-[360px] bg-gray-200 overflow-hidden">
+              <img src={getImage(service)} alt={title} className="absolute inset-0 w-full h-full object-cover" />
+            </div>
+          </Reveal>
+          <Reveal variant="up" delay={120}>
+            <div className="bg-white p-6 md:p-8 mt-6 border border-gray-200">
+              <h1 className="text-2xl md:text-3xl font-extrabold mb-4">{title}</h1>
+              <div
+                className="prose max-w-none prose-p:leading-7"
+                dangerouslySetInnerHTML={{ __html: service?.description || '<p>Details coming soon.</p>' }}
+              />
+            </div>
+          </Reveal>
         </article>
 
         <aside className="lg:col-span-4">
-          <div className="bg-white border border-gray-200 p-5">
-            <h3 className="text-sm uppercase tracking-[.2em] text-gray-500 mb-3">Other Services</h3>
-            <ul className="space-y-3">
-              {others.map((s) => (
-                <li key={String(s.id)}>
-                  <a href={`/services/${s.id}`} className="flex items-center gap-3 group">
-                    <FaAngleRight className="text-orange-500 text-xl shrink-0" />
-                    <span className="font-semibold group-hover:text-orange-600">{s.title || s.name}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Reveal variant="left" delay={0}>
+            <div className="bg-white border border-gray-200 p-5">
+              <h3 className="text-sm uppercase tracking-[.2em] text-gray-500 mb-3">Other Services</h3>
+              <ul className="space-y-3">
+                {others.map((s) => (
+                  <li key={String(s.id)}>
+                    <a href={`/services/${s.id}`} className="flex items-center gap-3 group">
+                      <FaAngleRight className="text-orange-500 text-xl shrink-0" />
+                      <span className="font-semibold group-hover:text-orange-600">{s.title || s.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         </aside>
       </main>
     </div>

@@ -1,4 +1,5 @@
 import PageHeader from '../../../components/PageHeader'
+import Reveal from '../../../components/Reveal'
 
 export default async function TeamDetail(props: any) {
   const params = await props.params
@@ -13,14 +14,18 @@ export default async function TeamDetail(props: any) {
       <PageHeader title={team?.name || 'Team Member'} />
       <main className="container mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4">
-          <div className="bg-white border border-gray-200 p-4">
-            <img src={photo} alt={team?.name} className="w-full h-auto object-cover" />
-            <h1 className="text-2xl font-extrabold mt-4">{team?.name}</h1>
-            <p className="text-gray-600">{team?.role || team?.position}</p>
-          </div>
+          <Reveal variant="left" delay={0}>
+            <div className="bg-white border border-gray-200 p-4">
+              <img src={photo} alt={team?.name} className="w-full h-auto object-cover" />
+              <h1 className="text-2xl font-extrabold mt-4">{team?.name}</h1>
+              <p className="text-gray-600">{team?.role || team?.position}</p>
+            </div>
+          </Reveal>
         </div>
         <div className="lg:col-span-8">
-          <div className="bg-white border border-gray-200 p-6 md:p-8 prose max-w-none" dangerouslySetInnerHTML={{ __html: team?.bio || team?.description || '<p>Profile details coming soon.</p>' }} />
+          <Reveal variant="up" delay={120}>
+            <div className="bg-white border border-gray-200 p-6 md:p-8 prose max-w-none" dangerouslySetInnerHTML={{ __html: team?.bio || team?.description || '<p>Profile details coming soon.</p>' }} />
+          </Reveal>
         </div>
       </main>
     </div>

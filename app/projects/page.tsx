@@ -67,16 +67,18 @@ export default function Projects() {
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6">
           <aside className="md:col-span-1">
-            <div className="bg-white border border-gray-200 p-4 sticky top-6">
-              <h3 className="text-sm uppercase tracking-[.2em] text-gray-500 mb-3">Project Categories</h3>
-              <div className="flex flex-col gap-2">
-                {categories.map((c: any) => (
-                  <button key={String(c.id)} onClick={() => setActiveCategory(String(c.id))} className={`text-left px-3 py-2 rounded ${String(c.id)===String(activeCategory)?'bg-orange-500 text-white':'hover:bg-gray-100'}`}>
-                    {c.name}
-                  </button>
-                ))}
+            <Reveal variant="left" delay={0}>
+              <div className="bg-white border border-gray-200 p-4 sticky top-6">
+                <h3 className="text-sm uppercase tracking-[.2em] text-gray-500 mb-3">Project Categories</h3>
+                <div className="flex flex-col gap-2">
+                  {categories.map((c: any, i: number) => (
+                    <button key={String(c.id)} onClick={() => setActiveCategory(String(c.id))} className={`text-left px-3 py-2 rounded ${String(c.id)===String(activeCategory)?'bg-orange-500 text-white':'hover:bg-gray-100'}`}>
+                      {c.name}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            </Reveal>
           </aside>
           <section className="md:col-span-3">
             {loading ? (
@@ -85,24 +87,28 @@ export default function Projects() {
               </div>
             ) : filtered.length ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filtered.map((p: any) => (
-                  <Link key={p.id} href={`/projects/${p.id}`} className="group block overflow-hidden bg-white border border-gray-200 relative h-72">
-                    <img src={getImageUrl(p)} alt={p.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                      <span className="text-xs font-semibold uppercase text-orange-400">{p.category || 'Project'}</span>
-                      <h3 className="text-lg font-extrabold leading-snug">{p.title}</h3>
-                      {p.progress !== undefined && (
-                        <div className="mt-2 w-full h-3 bg-white/20 rounded">
-                          <div className="h-3 bg-green-500 rounded" style={{ width: `${p.progress}%` }} />
-                        </div>
-                      )}
-                    </div>
-                  </Link>
+                {filtered.map((p: any, i: number) => (
+                  <Reveal key={p.id} variant="up" delay={i * 80}>
+                    <Link href={`/projects/${p.id}`} className="group block overflow-hidden bg-white border border-gray-200 relative h-72">
+                      <img src={getImageUrl(p)} alt={p.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                        <span className="text-xs font-semibold uppercase text-orange-400">{p.category || 'Project'}</span>
+                        <h3 className="text-lg font-extrabold leading-snug">{p.title}</h3>
+                        {p.progress !== undefined && (
+                          <div className="mt-2 w-full h-3 bg-white/20 rounded">
+                            <div className="h-3 bg-green-500 rounded" style={{ width: `${p.progress}%` }} />
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+                  </Reveal>
                 ))}
               </div>
             ) : (
-              <div className="text-center text-gray-600">No projects found.</div>
+              <Reveal variant="up">
+                <div className="text-center text-gray-600">No projects found.</div>
+              </Reveal>
             )}
           </section>
         </div>
